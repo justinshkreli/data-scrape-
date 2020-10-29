@@ -9,8 +9,8 @@ from datetime import datetime
 from collections import OrderedDict
 
 #A program that webscrapes stock prices from companies provided by the user.
-#An excel sheet collects a the ticker symbol for stock, stock price, 
-#the timestamp at which the price is scraped, the last timestamp at which the stock price is scraped,
+#An excel sheet collects a the ticker symbol for a stock, the stock's price, 
+#the timestamp at which the stock's price is scraped, the last timestamp at which the stock's price is scraped,
 # and the growth percentage of the price since the last time it was collected. 
 
 #following headers enable program to scrape bloomberg
@@ -60,7 +60,7 @@ def find_all_stock_symbols():
         company_query = input("Which company are you interested in: ")
     return stock_symbols
 
-#get the index at which ticker symbol starts in string
+#get the index at which ticker symbol starts in string (from html file)
 def get_start_index_symbol(parse_this):
     first_index_symbol = 0
     for index1 in range(len(parse_this)):
@@ -70,7 +70,7 @@ def get_start_index_symbol(parse_this):
                 break #found the index
     return first_index_symbol
 
-#extract ticker symbol from string
+#extract ticker symbol from string (that comes from html file)
 def get_symbol(sub_parse_this):
     symbol = ""
     for character in sub_parse_this:
@@ -94,7 +94,7 @@ def get_stock_prices(stock_symbols):
         soup = bsoup(r.content, 'html5lib')
 
         stock_price = 0
-        for part in soup.select('span[class*="priceText"]'): #dig in html for the part with price
+        for part in soup.select('span[class*="priceText"]'): #dig in html for the part with stock's price
             stock_price = part.get_text()
         stock_prices["prices"].append(str(stock_price.replace(",",""))) #only get the number characters
 
@@ -103,7 +103,7 @@ def get_stock_prices(stock_symbols):
         stock_prices["now_time"].append(current_time)
     return stock_prices 
 
-#update the whole excel file
+#update the whole excel file 
 def apply_changes(stock_prices):
     stock_prices["prev_time"] = []
     stock_prices["growth_percents"] = []
