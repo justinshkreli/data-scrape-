@@ -8,8 +8,9 @@ import xlrd
 from datetime import datetime
 from collections import OrderedDict
 
-#A program that webscrapes stock prices from companies provided by the user.
-#An excel sheet collects a the ticker symbol for a stock, the stock's price, 
+#A user provides the names of all the publicly traded companies they would like to research.
+#A program then gathers information about the companies' stocks from the web. 
+#Finally, an excel sheet collects a the ticker symbol for a stock, the stock's price, 
 #the timestamp at which the stock's price is scraped, the last timestamp at which the stock's price is scraped,
 # and the growth percentage of the price since the last time it was collected. 
 
